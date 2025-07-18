@@ -1,0 +1,72 @@
+# AI Scheduler Konfigürasyon Dosyası
+
+# Server Ayarları
+server:
+  port: 8080
+  host: "0.0.0.0"
+  read_timeout: 30s
+  write_timeout: 30s
+
+# Kubernetes Ayarları
+kubernetes:
+  # In-cluster config kullan (true) veya kubeconfig dosyası (false)
+  in_cluster: true
+  # Kubeconfig dosya yolu (in_cluster: false ise)
+  kubeconfig_path: "~/.kube/config"
+  # API timeout
+  api_timeout: 30s
+
+# Metrics Ayarları
+metrics:
+  # Metrics toplama aralığı
+  collection_interval: 30s
+  # Metrics API timeout
+  api_timeout: 10s
+  # Fallback değerler (Metrics API erişilemezse)
+  enable_fallback: true
+
+# AI Scheduler Ayarları
+scheduler:
+  # Python AI API endpoint
+  ai_api_url: "http://localhost:5000"
+  # Node skorlama ağırlıkları
+  scoring:
+    cpu_weight: 30.0
+    memory_weight: 30.0
+    node_ready_weight: 20.0
+    taint_weight: 10.0
+    failed_pods_weight: 20.0
+    restart_weight: 10.0
+  # Skorlama eşikleri
+  thresholds:
+    cpu_usage_threshold: 80.0  # %
+    memory_usage_threshold: 80.0  # %
+    failed_pods_threshold: 3
+    avg_restart_threshold: 1.0
+
+# Logging Ayarları
+logging:
+  level: "info"  # debug, info, warn, error
+  format: "json"  # json, text
+  # Log dosyası (opsiyonel)
+  file: ""
+  # Console output
+  console: true
+
+# Monitoring Ayarları
+monitoring:
+  # Health check endpoint
+  health_check: true
+  # Metrics endpoint
+  metrics_endpoint: true
+  # Prometheus metrics
+  prometheus: false
+
+# Development Ayarları
+development:
+  # Debug modu
+  debug: false
+  # Hot reload
+  hot_reload: false
+  # Mock data (test için)
+  mock_data: false 
