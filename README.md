@@ -2,6 +2,9 @@
 
 An intelligent Kubernetes scheduler that combines Go backend with Python AI components to make advanced pod placement decisions using machine learning and historical data analysis.
 
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/c0bda31a-5a1d-44df-bc7a-a78726b16c2b" />
+
+
 ## 🚀 Overview
 
 This project implements an AI-enhanced Kubernetes scheduler that goes beyond traditional resource-based scheduling by incorporating:
