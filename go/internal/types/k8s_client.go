@@ -23,14 +23,20 @@ func NewK8sClient() (*K8sClient, error) {
 	// In-cluster config kontrolü
 	if _, err := os.Stat("/var/run/secrets/kubernetes.io/serviceaccount/token"); err == nil {
 		config, err = rest.InClusterConfig()
+		if err != nil {
+			return nil, err
+		}
 	} else {
 		// Kubeconfig dosyasından config yükleme
 		kubeconfig := filepath.Join(os.Getenv("HOME"), ".kube", "config")
 		config, err = clientcmd.BuildConfigFromFlags("", kubeconfig)
-	}
-
-	if err != nil {
-		return nil, err
+		if err != nil {
+			// Kubernetes config bulunamadı, mock client döndür
+			return &K8sClient{
+				Clientset: nil,
+				Config:    nil,
+			}, nil
+		}
 	}
 
 	clientset, err := kubernetes.NewForConfig(config)

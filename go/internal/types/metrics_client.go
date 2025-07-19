@@ -15,6 +15,13 @@ type MetricsClient struct {
 
 // NewMetricsClient yeni metrics client oluşturur
 func NewMetricsClient(k8sClient *K8sClient) (*MetricsClient, error) {
+	// Kubernetes client kontrolü
+	if k8sClient == nil || k8sClient.Config == nil {
+		return &MetricsClient{
+			metricsClient: nil,
+		}, nil
+	}
+
 	metricsClient, err := metricsv1beta1.NewForConfig(k8sClient.Config)
 	if err != nil {
 		return nil, fmt.Errorf("metrics client oluşturulamadı: %v", err)
@@ -27,6 +34,11 @@ func NewMetricsClient(k8sClient *K8sClient) (*MetricsClient, error) {
 
 // GetNodeMetrics node'un CPU ve memory kullanımını döndürür
 func (mc *MetricsClient) GetNodeMetrics(nodeName string) (float64, float64, error) {
+	// Metrics client kontrolü
+	if mc == nil || mc.metricsClient == nil {
+		return 0.0, 0.0, fmt.Errorf("metrics client kullanılamıyor")
+	}
+
 	nodeMetrics, err := mc.metricsClient.MetricsV1beta1().NodeMetricses().Get(context.Background(), nodeName, metav1.GetOptions{})
 	if err != nil {
 		return 0, 0, fmt.Errorf("node metrics alınamadı: %v", err)
@@ -44,6 +56,11 @@ func (mc *MetricsClient) GetNodeMetrics(nodeName string) (float64, float64, erro
 
 // GetPodMetrics pod'un CPU ve memory kullanımını döndürür
 func (mc *MetricsClient) GetPodMetrics(namespace, podName string) (float64, float64, error) {
+	// Metrics client kontrolü
+	if mc == nil || mc.metricsClient == nil {
+		return 0.0, 0.0, fmt.Errorf("metrics client kullanılamıyor")
+	}
+
 	podMetrics, err := mc.metricsClient.MetricsV1beta1().PodMetricses(namespace).Get(context.Background(), podName, metav1.GetOptions{})
 	if err != nil {
 		return 0, 0, fmt.Errorf("pod metrics alınamadı: %v", err)

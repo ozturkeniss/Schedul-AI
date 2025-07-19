@@ -1,0 +1,170 @@
+[
+  {
+    "timestamp": "2025-07-19T08:00:56.554074",
+    "prediction": {
+      "predicted_node": "minikube",
+      "confidence": 1.0,
+      "algorithm": "ml_prediction",
+      "ai_features": {
+        "cluster_state": {
+          "avg_cpu_usage": 45.2,
+          "avg_memory_usage": 62.8,
+          "health_score": 100.0,
+          "ready_nodes": 1,
+          "resource_pressure": 54.0,
+          "total_nodes": 1
+        },
+        "pod_requirements": {
+          "cpu_request": 0.1,
+          "memory_request": 128.0
+        }
+      }
+    },
+    "actual": {
+      "actual_node": "minikube",
+      "success": true,
+      "pod_status": "Running"
+    },
+    "features": {
+      "pod_cpu_request": 0.1,
+      "pod_memory_request": 128.0,
+      "cluster_total_nodes": 1,
+      "cluster_ready_nodes": 1,
+      "cluster_avg_cpu": 45.2,
+      "cluster_avg_memory": 62.8,
+      "node_cpu_usage": 0.4775999999999999,
+      "node_memory_usage": 0.0,
+      "node_ready": 1.0,
+      "node_taint_count": 0,
+      "stability_score": 0.0,
+      "avg_cpu_usage": 0,
+      "avg_memory_usage": 0
+    }
+  },
+  {
+    "timestamp": "2025-07-19T08:01:05.151872",
+    "prediction": {
+      "predicted_node": "minikube",
+      "confidence": 1.0,
+      "algorithm": "ml_prediction",
+      "ai_features": {
+        "cluster_state": {
+          "avg_cpu_usage": 45.2,
+          "avg_memory_usage": 62.8,
+          "health_score": 100.0,
+          "ready_nodes": 1,
+          "resource_pressure": 54.0,
+          "total_nodes": 1
+        },
+        "pod_requirements": {
+          "cpu_request": 0.1,
+          "memory_request": 128.0
+        }
+      }
+    },
+    "actual": {
+      "actual_node": "minikube",
+      "success": true,
+      "pod_status": "Running"
+    },
+    "features": {
+      "pod_cpu_request": 0.1,
+      "pod_memory_request": 128.0,
+      "cluster_total_nodes": 1,
+      "cluster_ready_nodes": 1,
+      "cluster_avg_cpu": 45.2,
+      "cluster_avg_memory": 62.8,
+      "node_cpu_usage": 0.4775999999999999,
+      "node_memory_usage": 0.0,
+      "node_ready": 1.0,
+      "node_taint_count": 0,
+      "stability_score": 0.0,
+      "avg_cpu_usage": 0,
+      "avg_memory_usage": 0
+    }
+  },
+  {
+    "timestamp": "2025-07-19T08:01:06.172342",
+    "prediction": {
+      "predicted_node": "minikube",
+      "confidence": 1.0,
+      "algorithm": "ml_prediction",
+      "ai_features": {
+        "cluster_state": {
+          "avg_cpu_usage": 45.2,
+          "avg_memory_usage": 62.8,
+          "health_score": 100.0,
+          "ready_nodes": 1,
+          "resource_pressure": 54.0,
+          "total_nodes": 1
+        },
+        "pod_requirements": {
+          "cpu_request": 0.1,
+          "memory_request": 128.0
+        }
+      }
+    },
+    "actual": {
+      "actual_node": "minikube",
+      "success": true,
+      "pod_status": "Running"
+    },
+    "features": {
+      "pod_cpu_request": 0.1,
+      "pod_memory_request": 128.0,
+      "cluster_total_nodes": 1,
+      "cluster_ready_nodes": 1,
+      "cluster_avg_cpu": 45.2,
+      "cluster_avg_memory": 62.8,
+      "node_cpu_usage": 0.4775999999999999,
+      "node_memory_usage": 0.0,
+      "node_ready": 1.0,
+      "node_taint_count": 0,
+      "stability_score": 0.0,
+      "avg_cpu_usage": 0,
+      "avg_memory_usage": 0
+    }
+  },
+  {
+    "timestamp": "2025-07-19T08:01:07.204294",
+    "prediction": {
+      "predicted_node": "minikube",
+      "confidence": 1.0,
+      "algorithm": "ml_prediction",
+      "ai_features": {
+        "cluster_state": {
+          "avg_cpu_usage": 45.2,
+          "avg_memory_usage": 62.8,
+          "health_score": 100.0,
+          "ready_nodes": 1,
+          "resource_pressure": 54.0,
+          "total_nodes": 1
+        },
+        "pod_requirements": {
+          "cpu_request": 0.1,
+          "memory_request": 128.0
+        }
+      }
+    },
+    "actual": {
+      "actual_node": "minikube",
+      "success": true,
+      "pod_status": "Running"
+    },
+    "features": {
+      "pod_cpu_request": 0.1,
+      "pod_memory_request": 128.0,
+      "cluster_total_nodes": 1,
+      "cluster_ready_nodes": 1,
+      "cluster_avg_cpu": 45.2,
+      "cluster_avg_memory": 62.8,
+      "node_cpu_usage": 0.4775999999999999,
+      "node_memory_usage": 0.0,
+      "node_ready": 1.0,
+      "node_taint_count": 0,
+      "stability_score": 0.0,
+      "avg_cpu_usage": 0,
+      "avg_memory_usage": 0
+    }
+  }
+]

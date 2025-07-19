@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  # Go Backend Service
+  go-backend:
+    build:
+      context: ./go
+      dockerfile: Dockerfile
+    container_name: ai-scheduler-go-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - KUBECONFIG=/root/.kube/config
+    volumes:
+      - ~/.kube:/root/.kube:ro
+      - go-backend-data:/app/data
+    networks:
+      - ai-scheduler-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+
+  # Python AI Service
+  python-ai:
+    build:
+      context: ./python
+      dockerfile: Dockerfile
+    container_name: ai-scheduler-python-ai
+    ports:
+      - "5000:5000"
+    environment:
+      - GO_BACKEND_URL=http://go-backend:8080
+      - API_HOST=0.0.0.0
+      - API_PORT=5000
+      - DEBUG=false
+    volumes:
+      - python-ai-data:/app/data
+      - python-ai-models:/app/models
+    networks:
+      - ai-scheduler-network
+    depends_on:
+      go-backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+
+  # Minikube Service (Optional - for development)
+  minikube:
+    image: minikube/kicbase:v0.0.40
+    container_name: ai-scheduler-minikube
+    ports:
+      - "8443:8443"
+    environment:
+      - MINIKUBE_DRIVER=docker
+    volumes:
+      - minikube-data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - ai-scheduler-network
+    profiles:
+      - development
+
+volumes:
+  go-backend-data:
+    driver: local
+  python-ai-data:
+    driver: local
+  python-ai-models:
+    driver: local
+  minikube-data:
+    driver: local
+
+networks:
+  ai-scheduler-network:
+    driver: bridge 

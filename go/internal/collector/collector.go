@@ -58,6 +58,21 @@ func (dc *DataCollector) Start(ctx context.Context) {
 
 // collectNodeMetrics node metriklerini toplar
 func (dc *DataCollector) collectNodeMetrics() {
+	// Kubernetes client kontrolü
+	if dc.k8sClient == nil || dc.k8sClient.GetClientset() == nil {
+		logrus.Debug("Kubernetes client yok, mock node metrics kullanılıyor")
+		// Mock node metrics
+		mockMetrics := types.NodeMetrics{
+			NodeName:    "mock-node",
+			PodCount:    5,
+			CPUUsage:    0.3,
+			MemoryUsage: 0.4,
+			Timestamp:   time.Now(),
+		}
+		dc.metrics <- mockMetrics
+		return
+	}
+
 	nodes, err := dc.k8sClient.GetClientset().CoreV1().Nodes().List(context.Background(), metav1.ListOptions{})
 	if err != nil {
 		logrus.Errorf("Node listesi alınamadı: %v", err)
@@ -96,6 +111,24 @@ func (dc *DataCollector) collectNodeMetrics() {
 
 // collectPodMetrics pod metriklerini toplar
 func (dc *DataCollector) collectPodMetrics() {
+	// Kubernetes client kontrolü
+	if dc.k8sClient == nil || dc.k8sClient.GetClientset() == nil {
+		logrus.Debug("Kubernetes client yok, mock pod metrics kullanılıyor")
+		// Mock pod metrics
+		mockMetrics := types.PodMetrics{
+			PodName:      "mock-pod",
+			NodeName:     "mock-node",
+			Namespace:    "default",
+			Status:       "Running",
+			RestartCount: 0,
+			CreatedAt:    time.Now(),
+			Timestamp:    time.Now(),
+		}
+		dc.podCache.UpdateCache(mockMetrics)
+		dc.metrics <- mockMetrics
+		return
+	}
+
 	pods, err := dc.k8sClient.GetClientset().CoreV1().Pods("").List(context.Background(), metav1.ListOptions{})
 	if err != nil {
 		logrus.Errorf("Pod listesi alınamadı: %v", err)

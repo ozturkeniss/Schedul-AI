@@ -71,9 +71,19 @@ func getNodes(aiScheduler *scheduler.AIScheduler) gin.HandlerFunc {
 // getMetrics metrikleri döndürür
 func getMetrics(collector *collector.DataCollector) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// Metrik listesi implementasyonu
+		// Mock node data for testing
+		nodes := []gin.H{
+			{
+				"name":         "minikube",
+				"cpu_usage":    45.2,
+				"memory_usage": 62.8,
+				"ready":        true,
+				"taints":       []string{},
+			},
+		}
+
 		c.JSON(http.StatusOK, gin.H{
-			"metrics": []interface{}{},
+			"nodes": nodes,
 		})
 	}
 }

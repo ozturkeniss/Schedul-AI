@@ -1,0 +1,13 @@
+{
+  "total_predictions": 4,
+  "successful_predictions": 4,
+  "accuracy": 1.0,
+  "last_update": "2025-07-19T08:01:07.204351",
+  "daily_metrics": {
+    "2025-07-19": {
+      "predictions": 4,
+      "successful": 4,
+      "accuracy": 1.0
+    }
+  }
+}

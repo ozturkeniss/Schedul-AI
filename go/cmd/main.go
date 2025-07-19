@@ -45,6 +45,11 @@ func main() {
 		logrus.Fatalf("Kubernetes client oluşturulamadı: %v", err)
 	}
 
+	// Kubernetes client kontrolü
+	if k8sClient.Clientset == nil {
+		logrus.Warn("Kubernetes client bulunamadı, mock mode'da çalışıyor")
+	}
+
 	// Veri toplayıcı başlatma
 	collector := collector.NewDataCollector(k8sClient, &config.Metrics)
 	go collector.Start(context.Background())
